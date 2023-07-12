@@ -18,7 +18,8 @@ class _YourBalancePageState extends State<YourBalancePage> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: PreferredSize(
-          child: getAppBar(), preferredSize: const Size.fromHeight(60)),
+          preferredSize: const Size.fromHeight(60),
+          child: getAppBar()),
       body: getBody(),
     );
   }
