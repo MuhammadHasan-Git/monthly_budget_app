@@ -3,7 +3,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:monthly_budget_app/theme/colors.dart';
 import 'package:monthly_budget_app/widgets/chart_line.dart';
-
 import '../json/category_json.dart';
 import '../json/merchant_json.dart';
 
@@ -38,8 +37,8 @@ class _YourBalancePageState extends State<YourBalancePage> {
             color: black,
             size: 22,
           )),
-      actions: [
-        const Padding(
+      actions: const [
+        Padding(
           padding: EdgeInsets.only(top: 15, right: 15),
           child: Text(
             "Set Budget",
@@ -401,7 +400,7 @@ class _YourBalancePageState extends State<YourBalancePage> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Container(
