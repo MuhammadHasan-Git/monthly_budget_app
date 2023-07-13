@@ -130,11 +130,12 @@ class _DashboardPageState extends State<DashboardPage> {
                     width: 45,
                     height: 45,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                                "https://t3.ftcdn.net/jpg/04/67/63/68/360_F_467636853_Hs8fMr0TucvHVkvO2q0sbksdKU4pdOSQ.jpg"),
-                            fit: BoxFit.cover)),
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                          image: NetworkImage(
+                              "https://t3.ftcdn.net/jpg/04/67/63/68/360_F_467636853_Hs8fMr0TucvHVkvO2q0sbksdKU4pdOSQ.jpg"),
+                          fit: BoxFit.cover),
+                    ),
                   ),
                   Positioned(
                     top: 35,

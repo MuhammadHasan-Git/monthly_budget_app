@@ -1,8 +1,10 @@
+import 'package:circle_progress_bar/circle_progress_bar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:monthly_budget_app/theme/colors.dart';
 import 'package:monthly_budget_app/widgets/chart_line.dart';
 
+import '../json/category_json.dart';
 import '../json/merchant_json.dart';
 
 class YourBalancePage extends StatefulWidget {
@@ -18,8 +20,7 @@ class _YourBalancePageState extends State<YourBalancePage> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
-          child: getAppBar()),
+          preferredSize: const Size.fromHeight(60), child: getAppBar()),
       body: getBody(),
     );
   }
@@ -52,6 +53,7 @@ class _YourBalancePageState extends State<YourBalancePage> {
 
   Widget getBody() {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -67,6 +69,13 @@ class _YourBalancePageState extends State<YourBalancePage> {
             height: 30,
           ),
           getTopMerchants(),
+          const SizedBox(
+            height: 10,
+          ),
+          getTopCategories(),
+          const SizedBox(
+            height: 50,
+          ),
         ],
       ),
     );
@@ -313,4 +322,116 @@ class _YourBalancePageState extends State<YourBalancePage> {
     );
   }
 
+  Widget getTopCategories() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Top Category",
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              children: List.generate(categoryList.length, (index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Container(
+                    width: 150,
+                    height: 220,
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: black.withOpacity(0.015),
+                          spreadRadius: 10,
+                          blurRadius: 10,
+                        )
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 15, bottom: 0, top: 20),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 80,
+                            child: CircleProgressBar(
+                              foregroundColor: primary,
+                              backgroundColor: black.withOpacity(0.1),
+                              value: categoryList[index]['percentage'],
+                              child: Center(
+                                child: Text(
+                                  categoryList[index]['img'],
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            categoryList[index]['name'],
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            categoryList[index]['price'],
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: black.withOpacity(0.5),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            width: 80,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: bgColor,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "on track",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: black.withOpacity(0.7),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
